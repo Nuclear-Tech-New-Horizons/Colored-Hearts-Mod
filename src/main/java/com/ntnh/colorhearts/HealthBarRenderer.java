@@ -14,14 +14,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
+
 import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 
 /*
-TODO: Fix regeneration effect
+ * TODO: Fix regeneration effect
  */
 
 public class HealthBarRenderer extends Gui {
@@ -29,7 +31,9 @@ public class HealthBarRenderer extends Gui {
     private static final boolean isRpghudLoaded = Loader.isModLoaded("rpghud");
     private static final boolean isTukmc_vzLoaded = Loader.isModLoaded("tukmc_Vz");
     private static final boolean isBorderlandsModLoaded = Loader.isModLoaded("borderlands");
-    private static final ResourceLocation TINKER_HEARTS = new ResourceLocation("colorhearts", "textures/gui/newhearts.png");
+    private static final ResourceLocation TINKER_HEARTS = new ResourceLocation(
+        "colorhearts",
+        "textures/gui/newhearts.png");
     private static final Minecraft mc = Minecraft.getMinecraft();
     private final Random rand = new Random();
     private int updateCounter = 0;
@@ -98,7 +102,8 @@ public class HealthBarRenderer extends Gui {
 
         final int TOP;
         int tinkerTextureY = 0;
-        if (mc.theWorld.getWorldInfo().isHardcoreModeEnabled()) {
+        if (mc.theWorld.getWorldInfo()
+            .isHardcoreModeEnabled()) {
             TOP = 9 * 5;
             tinkerTextureY += 27;
         } else {
@@ -155,7 +160,8 @@ public class HealthBarRenderer extends Gui {
         }
 
         if (health > 20) {
-            mc.getTextureManager().bindTexture(TINKER_HEARTS);
+            mc.getTextureManager()
+                .bindTexture(TINKER_HEARTS);
             for (int i = Math.max(0, health / 20 - 2); i < health / 20; i++) {
                 final int heartIndexMax = Math.min(10, (health - 20 * (i + 1)) / 2);
 
@@ -183,7 +189,13 @@ public class HealthBarRenderer extends Gui {
                     }
                     if ((i + 1) * 20 + j * 2 + 21 >= health) {
                         if (health <= 240) {
-                            this.drawTexturedModalRect(xBasePos + 8 * j, yBasePos + y, 18 * textureColumn, tinkerTextureY, 9, 9);
+                            this.drawTexturedModalRect(
+                                xBasePos + 8 * j,
+                                yBasePos + y,
+                                18 * textureColumn,
+                                tinkerTextureY,
+                                9,
+                                9);
                         } else {
                             this.drawTexturedModalRect(xBasePos + 8 * j, yBasePos + y, 18 * 10, tinkerTextureY, 9, 9);
                             if (health <= 260) {
@@ -192,7 +204,13 @@ public class HealthBarRenderer extends Gui {
                                     this.drawTexturedModalRect(xBasePos + 8 * j, yBasePos + y, 0, 54, 9, 9);
                                 }
                             } else {
-                                this.drawTexturedModalRect(xBasePos + 8 * j, yBasePos + y, 18 * textureColumn, 54, 9, 9);
+                                this.drawTexturedModalRect(
+                                    xBasePos + 8 * j,
+                                    yBasePos + y,
+                                    18 * textureColumn,
+                                    54,
+                                    9,
+                                    9);
                             }
                         }
                     }
@@ -204,9 +222,21 @@ public class HealthBarRenderer extends Gui {
                         y += bounceOffset;
                     }
                     if (health <= 240) {
-                        this.drawTexturedModalRect(xBasePos + 8 * heartIndexMax, yBasePos + y, 9 + 18 * textureColumn, tinkerTextureY, 9, 9);
+                        this.drawTexturedModalRect(
+                            xBasePos + 8 * heartIndexMax,
+                            yBasePos + y,
+                            9 + 18 * textureColumn,
+                            tinkerTextureY,
+                            9,
+                            9);
                     } else {
-                        this.drawTexturedModalRect(xBasePos + 8 * heartIndexMax, yBasePos + y, 9 + 18 * 10, tinkerTextureY, 9, 9);
+                        this.drawTexturedModalRect(
+                            xBasePos + 8 * heartIndexMax,
+                            yBasePos + y,
+                            9 + 18 * 10,
+                            tinkerTextureY,
+                            9,
+                            9);
                         if (health <= 260) {
                             int fullOverlays = overlayCount / 2;
                             boolean hasHalfOverlay = (overlayCount % 2) == 1;
@@ -214,12 +244,19 @@ public class HealthBarRenderer extends Gui {
                                 this.drawTexturedModalRect(xBasePos + 8 * heartIndexMax, yBasePos + y, 9, 54, 9, 9);
                             }
                         } else {
-                            this.drawTexturedModalRect(xBasePos + 8 * heartIndexMax, yBasePos + y, 9 + 18 * textureColumn, 54, 9, 9);
+                            this.drawTexturedModalRect(
+                                xBasePos + 8 * heartIndexMax,
+                                yBasePos + y,
+                                9 + 18 * textureColumn,
+                                54,
+                                9,
+                                9);
                         }
                     }
                 }
             }
-            mc.getTextureManager().bindTexture(Gui.icons);
+            mc.getTextureManager()
+                .bindTexture(Gui.icons);
         }
 
         GuiIngameForge.left_height += 10;
